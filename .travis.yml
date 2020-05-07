@@ -1,0 +1,26 @@
+sudo: required
+language: generic
+
+services:
+  - docker
+
+before_install:
+  - docker build -t colleenberbon/multicontainer-docker-fibo-test -f ./client/Dockerfile.dev ./client
+
+script:
+  - docker run -e CI=true colleenberbon/multicontainer-docker-fibo-test npm test
+
+after_success:
+  - docker build -t colleenberbon/multicontainer-fibo-client ./client
+  - docker build -t colleenberbon/multicontainer-fibo-nginx ./nginx
+  - docker build -t colleenberbon/multicontainer-fibo-server ./server
+  - docker build -t colleenberbon/multicontainer-fibo-worker ./worker
+  #Log in to docker-cli
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
+  #Take these images to docker hub
+  - docker push colleenberbon/multicontainer-fibo-client
+  - docker push colleenberbon/multicontainer-fibo-nginx
+  - docker push colleenberbon/multicontainer-fibo-server 
+  - docker push colleenberbon/multicontainer-fibo-worker
+
+
