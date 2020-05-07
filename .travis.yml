@@ -22,5 +22,3 @@ after_success:
   - docker push colleenberbon/multicontainer-fibo-nginx
   - docker push colleenberbon/multicontainer-fibo-server 
   - docker push colleenberbon/multicontainer-fibo-worker
-
-
