@@ -22,3 +22,15 @@ after_success:
   - docker push colleenberbon/multicontainer-fibo-nginx
   - docker push colleenberbon/multicontainer-fibo-server 
   - docker push colleenberbon/multicontainer-fibo-worker
+
+deploy:
+  provider: elasticbeanstalk
+  region: us-east-2
+  app: multicontainer-fibo
+  env: MulticontainerFibo-env
+  bucket_name: elasticbeanstalk-us-east-2-265913181504
+  bucket_path: multicontainer-fibo
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
