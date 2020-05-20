@@ -17,7 +17,7 @@
 		},
 		{
 			"name": "worker",
-			"image": "colleenberbon/multicontainer-fibo-client",
+			"image": "colleenberbon/multicontainer-fibo-worker",
 			"hostname": "worker",
 			"essential": false,
 			"memory": 128
